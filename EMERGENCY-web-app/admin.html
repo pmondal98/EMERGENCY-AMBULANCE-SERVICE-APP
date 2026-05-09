@@ -15,14 +15,14 @@
             <i class="fa-solid fa-truck-medical"></i>
             Emergency Driver
         </a>
-        <div style="display: flex; align-items: center; gap: 15px;">
+        <div class="header-controls">
             <span class="status-badge status-idle hidden" id="driver-status" style="display: none;">Offline</span>
-            <button id="btn-toggle-status" class="btn btn-success hidden" style="padding: 0.5rem 1rem; font-size: 0.9rem; display: none;">Go Online</button>
-            <button id="btn-logout" class="btn btn-secondary hidden" style="padding: 0.3rem 0.8rem; font-size: 0.8rem; display: none;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            <button id="btn-toggle-status" class="btn btn-success btn-sm hidden" style="display: none;">Go Online</button>
+            <button id="btn-logout" class="btn btn-secondary btn-sm hidden" style="display: none;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
         </div>
     </header>
 
-    <main class="container" style="padding: 0 2rem;">
+    <main class="container main-content">
         
         <!-- Auth Section -->
         <section id="auth-section" class="auth-container fade-in">
@@ -62,7 +62,7 @@
                         <label class="form-label">Password</label>
                         <input type="password" id="auth-password" class="form-control" required placeholder="••••••••">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" id="auth-submit-btn">Login</button>
+                    <button type="submit" class="btn btn-primary auth-submit" id="auth-submit-btn">Login</button>
                 </form>
 
                 <div class="auth-toggle">
@@ -77,16 +77,16 @@
             <!-- Sidebar -->
             <aside class="sidebar glass-panel fade-in">
                 <div class="panel-section">
-                    <h2 class="panel-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <h2 class="panel-title panel-title-flex">
                         <span><i class="fa-solid fa-satellite-dish"></i> Emergency Requests</span>
-                        <button id="btn-refresh-location" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" title="Refresh Location">
+                        <button id="btn-refresh-location" class="btn btn-secondary btn-sm" title="Refresh Location">
                             <i class="fa-solid fa-location-crosshairs"></i>
                         </button>
                     </h2>
                     
                     <div id="requests-container">
-                        <div class="request-card" style="text-align: center; border: 1px dashed var(--border-color); background: transparent; padding: 2rem 1rem;">
-                            <i class="fa-solid fa-power-off" style="font-size: 2rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
+                        <div class="request-card offline-card">
+                            <i class="fa-solid fa-power-off offline-icon"></i>
                             <p>You are offline.</p>
                         </div>
                     </div>

@@ -15,14 +15,14 @@
             <i class="fa-solid fa-truck-medical"></i>
             Emergency
         </a>
-        <div style="display: flex; align-items: center; gap: 15px;">
+        <div class="header-controls">
             <span class="status-badge status-idle" id="user-status">Idle</span>
-            <span style="font-weight: 500;" id="user-email">User Portal</span>
-            <button id="btn-logout" class="btn btn-secondary hidden" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            <span class="header-user-email" id="user-email">User Portal</span>
+            <button id="btn-logout" class="btn btn-secondary btn-sm hidden"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
         </div>
     </header>
 
-    <main class="container" style="padding: 0 2rem;">
+    <main class="container main-content">
         
         <!-- Auth Section -->
         <section id="auth-section" class="auth-container fade-in">
@@ -41,7 +41,7 @@
                         <label class="form-label">Password</label>
                         <input type="password" id="auth-password" class="form-control" required placeholder="••••••••">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" id="auth-submit-btn">Login</button>
+                    <button type="submit" class="btn btn-primary auth-submit" id="auth-submit-btn">Login</button>
                 </form>
 
                 <div class="auth-toggle">
@@ -56,9 +56,9 @@
             <!-- Sidebar -->
             <aside class="sidebar glass-panel fade-in">
                 <div class="panel-section" id="booking-section">
-                    <h2 class="panel-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <h2 class="panel-title panel-title-flex">
                         <span><i class="fa-solid fa-location-dot"></i> Request Emergency</span>
-                        <button id="btn-refresh-location" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" title="Refresh Location">
+                        <button id="btn-refresh-location" class="btn btn-secondary btn-sm" title="Refresh Location">
                             <i class="fa-solid fa-location-crosshairs"></i>
                         </button>
                     </h2>
@@ -78,7 +78,7 @@
                         </select>
                     </div>
 
-                    <button id="btn-request" class="btn btn-primary" style="margin-top: 1rem;">
+                    <button id="btn-request" class="btn btn-primary mt-3">
                         <i class="fa-solid fa-bell"></i> Request Now
                     </button>
                 </div>
@@ -90,7 +90,7 @@
                         <h3>Status: <span id="request-status-text">Searching for Driver...</span></h3>
                         <p><i class="fa-solid fa-info-circle"></i> Please stay calm, we are locating the nearest ambulance.</p>
                         <p id="driver-info" class="hidden"><i class="fa-solid fa-user-nurse"></i> Driver: <span id="driver-name">Assigning...</span></p>
-                        <button id="btn-cancel" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">Cancel Request</button>
+                        <button id="btn-cancel" class="btn btn-secondary w-100 mt-3">Cancel Request</button>
                     </div>
                 </div>
             </aside>
