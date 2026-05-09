@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Portal - Book Ambulance</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <header class="glass-panel">
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-truck-medical"></i>
+            Emergency
+        </a>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span class="status-badge status-idle" id="user-status">Idle</span>
+            <span style="font-weight: 500;" id="user-email">User Portal</span>
+            <button id="btn-logout" class="btn btn-secondary hidden" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 0 2rem;">
+        
+        <!-- Auth Section -->
+        <section id="auth-section" class="auth-container fade-in">
+            <div class="auth-card glass-panel">
+                <h2 id="auth-title">User Login</h2>
+                <p id="auth-subtitle">Sign in to book an ambulance</p>
+                
+                <div id="auth-error" class="auth-error hidden"></div>
+
+                <form id="auth-form" class="form-group">
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="auth-email" class="form-control" required placeholder="user@example.com">
+                    </div>
+                    <div class="form-group" style="margin-top: 0.5rem;">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="auth-password" class="form-control" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" id="auth-submit-btn">Login</button>
+                </form>
+
+                <div class="auth-toggle">
+                    <span id="auth-toggle-text">Don't have an account?</span> 
+                    <a id="btn-toggle-auth">Register</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main App Layout (Hidden by default until authenticated) -->
+        <div id="main-app" class="app-layout hidden">
+            <!-- Sidebar -->
+            <aside class="sidebar glass-panel fade-in">
+                <div class="panel-section" id="booking-section">
+                    <h2 class="panel-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span><i class="fa-solid fa-location-dot"></i> Request Emergency</span>
+                        <button id="btn-refresh-location" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" title="Refresh Location">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </button>
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Pickup Location</label>
+                        <input type="text" id="pickup-location" class="form-control" value="Fetching current location..." readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Emergency Type</label>
+                        <select id="emergency-type" class="form-control">
+                            <option value="medical">Medical Emergency</option>
+                            <option value="accident">Accident</option>
+                            <option value="fire">Fire / Burns</option>
+                            <option value="pregnancy">Pregnancy</option>
+                        </select>
+                    </div>
+
+                    <button id="btn-request" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fa-solid fa-bell"></i> Request Now
+                    </button>
+                </div>
+
+                <!-- Active Request Section (Hidden initially) -->
+                <div class="panel-section hidden" id="active-request-section">
+                    <h2 class="panel-title"><i class="fa-solid fa-spinner fa-spin"></i> Active Request</h2>
+                    <div class="request-card pulse">
+                        <h3>Status: <span id="request-status-text">Searching for Driver...</span></h3>
+                        <p><i class="fa-solid fa-info-circle"></i> Please stay calm, we are locating the nearest ambulance.</p>
+                        <p id="driver-info" class="hidden"><i class="fa-solid fa-user-nurse"></i> Driver: <span id="driver-name">Assigning...</span></p>
+                        <button id="btn-cancel" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">Cancel Request</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Map Container -->
+            <section class="map-container glass-panel fade-in" style="animation-delay: 0.2s;">
+                <div id="map"></div>
+                
+                <!-- Loading overlay before map loads -->
+                <div id="map-loading" class="loading-overlay">
+                    <div class="spinner"></div>
+                    <p>Initializing Map & Location...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="js/user.js"></script>
+</body>
+</html>

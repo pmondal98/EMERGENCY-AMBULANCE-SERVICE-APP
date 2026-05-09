@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Portal - Ambulance Service</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <header class="glass-panel">
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-truck-medical"></i>
+            Emergency Driver
+        </a>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span class="status-badge status-idle hidden" id="driver-status" style="display: none;">Offline</span>
+            <button id="btn-toggle-status" class="btn btn-success hidden" style="padding: 0.5rem 1rem; font-size: 0.9rem; display: none;">Go Online</button>
+            <button id="btn-logout" class="btn btn-secondary hidden" style="padding: 0.3rem 0.8rem; font-size: 0.8rem; display: none;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 0 2rem;">
+        
+        <!-- Auth Section -->
+        <section id="auth-section" class="auth-container fade-in">
+            <div class="auth-card glass-panel">
+                <h2 id="auth-title">Driver Login</h2>
+                <p id="auth-subtitle">Sign in to start receiving requests</p>
+                
+                <div id="auth-error" class="auth-error hidden"></div>
+
+                <form id="auth-form" class="form-group">
+                    <!-- Additional Registration Fields (Hidden by default) -->
+                    <div id="register-fields" class="hidden form-group" style="gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" id="auth-name" class="form-control" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">License Plate Number</label>
+                            <input type="text" id="auth-ambulance-plate" class="form-control" placeholder="e.g., MH-12-AB-1234">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ambulance Type</label>
+                            <select id="auth-ambulance-type" class="form-control">
+                                <option value="Basic Life Support (BLS)">Basic Life Support (BLS)</option>
+                                <option value="Advanced Life Support (ALS)">Advanced Life Support (ALS)</option>
+                                <option value="Patient Transport Vehicle (PTV)">Patient Transport Vehicle (PTV)</option>
+                                <option value="Neonatal Ambulance">Neonatal Ambulance</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="auth-email" class="form-control" required placeholder="driver@example.com">
+                    </div>
+                    <div class="form-group" style="margin-top: 0.5rem;">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="auth-password" class="form-control" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" id="auth-submit-btn">Login</button>
+                </form>
+
+                <div class="auth-toggle">
+                    <span id="auth-toggle-text">Don't have a driver account?</span> 
+                    <a id="btn-toggle-auth">Register</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main App Layout -->
+        <div id="main-app" class="app-layout hidden">
+            <!-- Sidebar -->
+            <aside class="sidebar glass-panel fade-in">
+                <div class="panel-section">
+                    <h2 class="panel-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span><i class="fa-solid fa-satellite-dish"></i> Emergency Requests</span>
+                        <button id="btn-refresh-location" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" title="Refresh Location">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </button>
+                    </h2>
+                    
+                    <div id="requests-container">
+                        <div class="request-card" style="text-align: center; border: 1px dashed var(--border-color); background: transparent; padding: 2rem 1rem;">
+                            <i class="fa-solid fa-power-off" style="font-size: 2rem; color: var(--text-secondary); margin-bottom: 1rem;"></i>
+                            <p>You are offline.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Map Container -->
+            <section class="map-container glass-panel fade-in" style="animation-delay: 0.2s;">
+                <div id="map"></div>
+                
+                <div id="map-loading" class="loading-overlay">
+                    <div class="spinner"></div>
+                    <p>Initializing Map & Driver Location...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
